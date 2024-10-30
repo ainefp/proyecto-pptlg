@@ -1,6 +1,6 @@
 def num_aleatorio():
     import random
-    return int(random.randint(0, 3))
+    return int(random.randint(1, 3))
 
 def menu():
     print("Bienvenid@ al juego, a continuación mostraremos una breve explicación del funcionamiento y el menú de opciones.")
@@ -45,39 +45,34 @@ def partida(ordenador, usuario):
         return True
     return False
 
-# victorias_usuario = 0
-# victorias_ordenador = 0
-opcion_ordenador = num_aleatorio()
+victorias_usuario = 0
+victorias_ordenador = 0
 
 menu()
 
-
-#while victorias_ordenador < 3 or victorias_usuario < 3:
-
-opcion_usuario = int(input("Elija una de las opciones: "))
-
-resultado = partida(opcion_ordenador, opcion_usuario)
-
-while opcion_usuario < 1 or opcion_usuario > 3:
-    print("El parámetro introducido no es válido, debe introducir un número entero comprendido entre 1 y 3, por favor inténtelo de nuevo.")
+while victorias_ordenador < 3 and victorias_usuario < 3:
     opcion_usuario = int(input("Elija una de las opciones: "))
 
-print("Tu eleccion ha sido", eleccion(opcion_usuario), "y la del ordenador", eleccion(opcion_ordenador), num_aleatorio())
+    while opcion_usuario < 1 or opcion_usuario > 3:
+        print("El parámetro introducido no es válido, debe introducir un número entero comprendido entre 1 y 3, por favor inténtelo de nuevo.")
+        opcion_usuario = int(input("Elija una de las opciones: "))
 
-if resultado == True:
-    #victorias_ordenador += 1
-    print("El ordenador ha ganado esta partida")
-elif resultado == False:
-    #victorias_usuario += 1
-    print("Tú has ganado esta partida")
-elif resultado == "empate":
-    print(resultado)
-    #print("El resultado de esta partida ha sido", partida(opcion_ordenador, opcion_usuario))
+    opcion_ordenador = num_aleatorio()
 
+    print("Tu eleccion ha sido", eleccion(opcion_usuario), "y la del ordenador", eleccion(opcion_ordenador))
 
-# if victorias_usuario > victorias_ordenador:
-#     print("Felicidades!! Has ganado las tres partidas, puedes seguir jugando si lo deseas.")
-# elif victorias_usuario == victorias_ordenador:
-#     print("Habéis empatado las tres partidas, puedes seguir jugando para desempatar.")
-# else:
-#     print("Vaya, el ordenador ha ganado las tres partidas, te deseo más suerte la próxima vez.")
+    resultado = partida(opcion_ordenador, opcion_usuario)
+
+    if resultado == True:
+        victorias_ordenador += 1
+        print("El ordenador ha ganado esta partida")
+    elif resultado == False:
+        victorias_usuario += 1
+        print("Tú has ganado esta partida")
+    elif resultado == "empate":
+        print("El resultado de esta partida ha sido", resultado)
+
+if victorias_usuario > victorias_ordenador:
+    print("Felicidades!! Has ganado las tres partidas, puedes seguir jugando si lo deseas.")
+else:
+    print("Vaya, el ordenador ha ganado las tres partidas, te deseo más suerte la próxima vez.")
