@@ -24,6 +24,8 @@ def menu() -> str:
         #   5. Spock
         #   """)
 
+        # para lagart-spock usamos %5 porque cada 1 gana a los 2 siguientes
+
 def eleccion(numero: int) -> str:
     match numero:
         case 0:
