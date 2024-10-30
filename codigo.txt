@@ -1,0 +1,8 @@
+def eleccion_usuario(numero):
+	match numero:
+		case 1:
+			return "pedra"
+		case 2:
+			return "papel"
+
+print("tu eleccion ha sido", eleccion(pregunta_usuario), "y la del ordenador, eleccion(num_aleatorio))

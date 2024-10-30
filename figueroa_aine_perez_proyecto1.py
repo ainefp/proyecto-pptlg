@@ -1,6 +1,6 @@
 def num_aleatorio():
     import random
-    print(random.randint(0, 3))
+    return int(random.randint(0, 3))
 
 def menu():
     print("Bienvenid@ al juego, a continuación mostraremos una breve explicación del funcionamiento y el menú de opciones.")
@@ -24,36 +24,60 @@ def menu():
         #   5. Spock
         #   """)
 
+def eleccion(numero):
+    match numero:
+        case 1:
+            return "piedra"
+        case 2:
+            return "papel"
+        case 3:
+            return "tijeras"
+    
+        # case 3:
+        #     return "lagarto"
+        # case 4:
+        #     return "spock"
+
 def partida(ordenador, usuario):
-    victorias_usuario = 0
-    victorias_ordenador = 0
+    if ordenador == usuario:
+        return "empate"
+    elif ordenador == (usuario +1) % 3:
+        return True
+    return False
 
-    while victorias_ordenador < 3 or victorias_usuario < 3:
-        if ordenador == usuario:
-            pass
-        if ordenador == 1:
-            if usuario == 3:
-                victorias_ordenador += 1
-            if usuario == 2:
-                victorias_usuario += 1
-        if ordenador == 2:
-            if usuario == 1:
-                victorias_ordenador += 1
-            if usuario == 3:
-                victorias_usuario += 1
-        if ordenador == 3:
-            if usuario == 2:
-                victorias_ordenador += 1
-            if usuario == 1:
-                victorias_usuario += 1
-
+# victorias_usuario = 0
+# victorias_ordenador = 0
+opcion_ordenador = num_aleatorio()
 
 menu()
 
+
+#while victorias_ordenador < 3 or victorias_usuario < 3:
+
 opcion_usuario = int(input("Elija una de las opciones: "))
 
+resultado = partida(opcion_ordenador, opcion_usuario)
+
 while opcion_usuario < 1 or opcion_usuario > 3:
-    print("El parámetro introducido no es válido, debe introducir un número entero comprendido entre 1 y 5, por favor inténtelo de nuevo.")
+    print("El parámetro introducido no es válido, debe introducir un número entero comprendido entre 1 y 3, por favor inténtelo de nuevo.")
     opcion_usuario = int(input("Elija una de las opciones: "))
 
-partida(num_aleatorio, opcion_usuario)
+print("Tu eleccion ha sido", eleccion(opcion_usuario), "y la del ordenador", eleccion(opcion_ordenador), num_aleatorio())
+
+if resultado == True:
+    #victorias_ordenador += 1
+    print("El ordenador ha ganado esta partida")
+elif resultado == False:
+    #victorias_usuario += 1
+    print("Tú has ganado esta partida")
+elif resultado == "empate":
+    print(resultado)
+    #print("El resultado de esta partida ha sido", partida(opcion_ordenador, opcion_usuario))
+
+
+# if victorias_usuario > victorias_ordenador:
+#     print("Felicidades!! Has ganado las tres partidas, puedes seguir jugando si lo deseas.")
+# elif victorias_usuario == victorias_ordenador:
+#     print("Habéis empatado las tres partidas, puedes seguir jugando para desempatar.")
+# else:
+#     print("Vaya, el ordenador ha ganado las tres partidas, te deseo más suerte la próxima vez.")
