@@ -1,8 +1,11 @@
-def eleccion_usuario(numero):
+def opcion_usuario(numero):
 	match numero:
 		case 1:
 			return "pedra"
 		case 2:
 			return "papel"
+		case 3:
+			return "tijeras"
 
-print("tu eleccion ha sido", eleccion(pregunta_usuario), "y la del ordenador, eleccion(num_aleatorio))
+eleccion_pc = opcion_pc + 1 # Esto es para que la elección se haga con 1, 2 y 3, simplemente estético
+print("tu eleccion ha sido", eleccion(opcion_usuario), "y la del ordenador, eleccion(eleccion_ordenador))
