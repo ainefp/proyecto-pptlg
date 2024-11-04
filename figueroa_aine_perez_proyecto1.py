@@ -75,7 +75,6 @@ while victorias_ordenador < 3 and victorias_usuario < 3:
         opcion_usuario = int(input("Elija una de las opciones: ")) - 1
 
     opcion_ordenador = num_aleatorio()
-    # eleccion_ordenador = opcion_ordenador + 1
 
     print("Tu eleccion ha sido", eleccion(opcion_usuario), "y la del ordenador", eleccion(opcion_ordenador))
 
