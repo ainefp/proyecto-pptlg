@@ -42,6 +42,10 @@ def menu() -> str:
     # continuar más adelante con esto
 
 def eleccion(numero: int) -> str:
+    '''
+    Transforma el número que se le indique en uno de los nombres de las jugadas.
+    Esta función no tiene mayor relevancia para el desempeño del código, su utilidad es para la claridad del usuarios
+    '''
     match numero:
         case 0:
             return "piedra"
