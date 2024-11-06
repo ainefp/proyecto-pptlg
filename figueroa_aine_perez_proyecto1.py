@@ -71,6 +71,8 @@ victorias_ordenador = 0
 menu()
 reglas()
 
+print("_____________________________________________________________\n")
+
 while victorias_ordenador < 3 and victorias_usuario < 3:
     opcion_usuario = int(input("Elija una de las opciones: ")) - 1
 
@@ -80,22 +82,25 @@ while victorias_ordenador < 3 and victorias_usuario < 3:
 
     opcion_ordenador = num_aleatorio()
 
-    print("Tu eleccion ha sido", eleccion(opcion_usuario), "y la del ordenador", eleccion(opcion_ordenador))
+    print("Tu elección ha sido", eleccion(opcion_usuario), "y la del ordenador", eleccion(opcion_ordenador), "\n")
 
     resultado = partida(opcion_ordenador, opcion_usuario)
 
     if resultado == True:
         victorias_ordenador += 1
         print("El ordenador ha ganado esta partida.")
-        print("Recuento de puntos:\nVictorias usuario:", victorias_usuario, " |  Victorias ordenador:", victorias_ordenador, "\n")
+        print("\nRecuento de puntos:\nVictorias usuario:", victorias_usuario, " |  Victorias ordenador:", victorias_ordenador)
     elif resultado == False:
         victorias_usuario += 1
         print("Tú has ganado esta partida.")
-        print("Recuento de puntos:\nVictorias usuario:", victorias_usuario, " |  Victorias ordenador:", victorias_ordenador, "\n")
+        print("\nRecuento de puntos:\nVictorias usuario:", victorias_usuario, " |  Victorias ordenador:", victorias_ordenador)
     elif resultado == "empate":
-        print("El resultado de esta partida ha sido", resultado, "\n")
+        print("El resultado de esta partida ha sido", resultado)
+        print("\nRecuento de puntos:\nVictorias usuario:", victorias_usuario, " |  Victorias ordenador:", victorias_ordenador)
+    
+    print("_____________________________________________________________\n")
 
 if victorias_usuario > victorias_ordenador:
-    print("Felicidades!! Has ganado las tres partidas, puedes seguir jugando si lo deseas.")
+    print("Felicidades!! Has ganado las tres partidas, puedes seguir jugando si lo deseas.\n")
 else:
-    print("Vaya, el ordenador ha ganado las tres partidas, te deseo más suerte la próxima vez.")
+    print("Vaya, el ordenador ha ganado las tres partidas, te deseo más suerte la próxima vez.\n")
