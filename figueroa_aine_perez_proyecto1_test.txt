@@ -26,3 +26,10 @@ False
 
 >>> partida(2, 1)
 True
+
+
+if ordenador == usuario:
+        return "empate"
+    elif ordenador == (usuario +1) % 3: # Con esta fórmula gana el ordenador
+        return True
+    return False

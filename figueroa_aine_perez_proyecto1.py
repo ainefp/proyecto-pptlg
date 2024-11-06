@@ -10,41 +10,38 @@ def menu() -> str:
     Función que genera un menú de presentación antes de comenzar el juego.
     Pregunta al usuario si quiere conocer las reglas para mostrar más información
     '''
-    print("Bienvenid@ al juego, a continuación mostraremos una breve explicación del funcionamiento y el menú de opciones.")
-    print("Piedra gana a tijera; tijera gana a papel; papel gana a piedra.")
-    
-    # print("Piedra gana a tijera y a lagarto; tijera gana a papel y a lagarto; papel gana a piedra y a spock; lagarto gana a spock y a papel; spock gana a tijeras y a piedra.")
+    print("Bienvenid@ al juego, a continuación mostraremos el menú de inicio.")
     print("""
     1. Piedra
     2. Papel
     3. Tijeras
+    4. Lagarto
+    5. Spock
     """)
-    # 1 > 3 // gana ordenador
-    # 1 < 2
 
-    # 2 > 1 // gana ordenador
-    # 2 < 3
+    # para lagart-spock usamos %5 porque cada 1 gana a los 2 siguientes
 
-    # 3 > 2 // gana ordenador
-    # 3 < 1
-
-        #   4. Lagarto
-        #   5. Spock
-        #   """)
-
-        # para lagart-spock usamos %5 porque cada 1 gana a los 2 siguientes
-
+def reglas() -> str:
+    '''
+    Reglas del juego.
+    '''
     respuesta = input("¿Quiere ver las reglas del juego? (s/n) ")
     while respuesta != "s" and respuesta != "n":
-        print('El parámetro introducido no es válido, por favor inténtelo de nuevo respondiendo con "s" o "n"')
+        print("El parámetro introducido no es válido, por favor inténtelo de nuevo respondiendo con 's' o 'n'.\n")
         respuesta = input("¿Quiere ver las reglas del juego? (s/n) ")
+    
     print()
-    # continuar más adelante con esto
+    if respuesta == "s":
+        print("Partiendo del juego básico (Piedra, Papel y Tijeras), llevamos a cabo esta expansión, en honor a Sheldon Cooper, que incluye Lagarto y Spock.")
+        print("Las reglas son sencillas, el objetivo del juego es vencer al oponente con el arma seleccionada. Cada arma gana a dos armas y a su vez pierde contra dos armas.")
+        print("")
+        print("Entiéndase por 'arma' cada una de las opciones mostradas en el menú inicial.")
+        print("Piedra gana a tijera y a lagarto; tijera gana a papel y a lagarto; papel gana a piedra y a spock; lagarto gana a spock y a papel; spock gana a tijeras y a piedra.\n")
 
 def eleccion(numero: int) -> str:
     '''
     Transforma el número que se le indique en uno de los nombres de las jugadas.
-    Esta función no tiene mayor relevancia para el desempeño del código, su utilidad es para la claridad del usuarios
+    Esta función no tiene mayor relevancia para el desempeño del código, su utilidad es favorecer a la claridad de los usuarios.
     '''
     match numero:
         case 0:
@@ -60,6 +57,8 @@ def eleccion(numero: int) -> str:
         #     return "spock"
 
 def partida(ordenador: int, usuario: int) -> bool | str:
+    ordenador = 0
+    usuario = 1
     if ordenador == usuario:
         return "empate"
     elif ordenador == (usuario +1) % 3: # Con esta fórmula gana el ordenador
@@ -70,6 +69,7 @@ victorias_usuario = 0
 victorias_ordenador = 0
 
 menu()
+reglas()
 
 while victorias_ordenador < 3 and victorias_usuario < 3:
     opcion_usuario = int(input("Elija una de las opciones: ")) - 1
@@ -86,10 +86,12 @@ while victorias_ordenador < 3 and victorias_usuario < 3:
 
     if resultado == True:
         victorias_ordenador += 1
-        print("El ordenador ha ganado esta partida \n")
+        print("El ordenador ha ganado esta partida.")
+        print("Recuento de puntos:\nVictorias usuario:", victorias_usuario, " |  Victorias ordenador:", victorias_ordenador, "\n")
     elif resultado == False:
         victorias_usuario += 1
-        print("Tú has ganado esta partida \n")
+        print("Tú has ganado esta partida.")
+        print("Recuento de puntos:\nVictorias usuario:", victorias_usuario, " |  Victorias ordenador:", victorias_ordenador, "\n")
     elif resultado == "empate":
         print("El resultado de esta partida ha sido", resultado, "\n")
 
