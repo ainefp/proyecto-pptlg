@@ -34,8 +34,7 @@ def reglas() -> str:
     if respuesta == "s":
         print("Partiendo del juego básico (Piedra, Papel y Tijeras), llevamos a cabo esta expansión, en honor a Sheldon Cooper, que incluye Lagarto y Spock.")
         print("Las reglas son sencillas, el objetivo del juego es vencer al oponente con el arma seleccionada. Cada arma gana a dos armas y a su vez pierde contra dos armas.")
-        print("")
-        print("Entiéndase por 'arma' cada una de las opciones mostradas en el menú inicial.")
+        print("Entiéndase por 'arma' cada una de las opciones mostradas en el menú inicial.\n")
         print("Piedra gana a tijera y a lagarto; tijera gana a papel y a lagarto; papel gana a piedra y a spock; lagarto gana a spock y a papel; spock gana a tijeras y a piedra.\n")
 
 def eleccion(numero: int) -> str:
@@ -65,6 +64,8 @@ def partida(ordenador: int, usuario: int) -> bool | str:
         return True
     return False
 
+import time
+
 victorias_usuario = 0
 victorias_ordenador = 0
 
@@ -82,7 +83,10 @@ while victorias_ordenador < 3 and victorias_usuario < 3:
 
     opcion_ordenador = num_aleatorio()
 
+    time.sleep(0.5)
     print("Tu elección ha sido", eleccion(opcion_usuario), "y la del ordenador", eleccion(opcion_ordenador), "\n")
+
+    time.sleep(1)
 
     resultado = partida(opcion_ordenador, opcion_usuario)
 
@@ -99,6 +103,7 @@ while victorias_ordenador < 3 and victorias_usuario < 3:
         print("\nRecuento de puntos:\nVictorias usuario:", victorias_usuario, " |  Victorias ordenador:", victorias_ordenador)
     
     print("_____________________________________________________________\n")
+    time.sleep(1)
 
 if victorias_usuario > victorias_ordenador:
     print("Felicidades!! Has ganado las tres partidas, puedes seguir jugando si lo deseas.\n")
