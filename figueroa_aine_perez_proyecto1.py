@@ -15,10 +15,10 @@ def menu() -> str:
     print("Bienvenid@ al juego, a continuación mostraremos el menú de inicio.")
     print("""
     1. Piedra
-    2. Papel
-    3. Tijeras
+    2. Spock
+    3. Papel
     4. Lagarto
-    5. Spock
+    5. Tijeras
     """)
 
     # para lagart-spock usamos %5 porque cada 1 gana a los 2 siguientes
@@ -34,11 +34,15 @@ def reglas() -> str:
     
     print()
     if respuesta == "s":
-        print("Partiendo del juego básico (Piedra, Papel y Tijeras), llevamos a cabo esta expansión, en honor a Sheldon Cooper, que incluye Lagarto y Spock.")
+        print("Partiendo del juego básico (Piedra, Papel y Tijeras) llevamos a cabo esta expansión, en honor a Sheldon Cooper, que incluye Lagarto y Spock.")
         print("Las reglas son sencillas, el objetivo del juego es vencer al oponente con el arma seleccionada. Cada arma gana a dos armas y a su vez pierde contra dos armas.")
         print("Entiéndase por 'arma' cada una de las opciones mostradas en el menú inicial.\n")
-        print("Piedra gana a tijera y a lagarto; tijera gana a papel y a lagarto; papel gana a piedra y a spock; lagarto gana a spock y a papel; spock gana a tijeras y a piedra.")
-        print("bla bla bla\n")
+        print("Las tijeras cortan el papel, el papel envuelve la piedra, la piedra aplasta al lagarto, el lagarto envenena a Spock, Spock aplasta las tijeras, las tijeras decapitan al lagarto, el lagarto devora el papel, el papel desaprueba a Spock, Spock desintegra la piedra y, como siempre, la piedra aplasta las tijeras.\n")
+        print("Para que se vea de forma más clara:\n")
+        print("""
+bla bla
+              """)
+        sleep(0.5)
 
 def eleccion(numero: int) -> str:
     '''
@@ -49,19 +53,18 @@ def eleccion(numero: int) -> str:
         case 0:
             return "piedra"
         case 1:
-            return "papel"
+            return "spock"
         case 2:
+            return "papel"
+        case 3:
+            return "lagarto"
+        case 4:
             return "tijeras"
-    
-        # case 3:
-        #     return "lagarto"
-        # case 4:
-        #     return "spock"
 
 def partida(ordenador: int, usuario: int) -> bool | str:
     if ordenador == usuario:
         return "empate"
-    elif ordenador == (usuario +1) % 3: # Con esta fórmula gana el ordenador
+    elif ordenador == (usuario + 1) % 5 or ordenador == (usuario + 2) % 5: # Con esta fórmula gana el ordenador
         return True
     return False
 
@@ -76,7 +79,7 @@ print("_____________________________________________________________\n")
 while victorias_ordenador < 3 and victorias_usuario < 3:
     opcion_usuario = int(input("Elija una de las opciones: ")) - 1
 
-    while opcion_usuario < 0 or opcion_usuario > 2:
+    while opcion_usuario < 0 or opcion_usuario > 4:
         print("El parámetro introducido no es válido, debe introducir un número entero comprendido entre 1 y 3, por favor inténtelo de nuevo.\n")
         opcion_usuario = int(input("Elija una de las opciones: ")) - 1
 
