@@ -50,6 +50,7 @@ def reglas() -> str:
     respuesta = input("¿Quiere ver las reglas del juego? (s/n) ")
 
     while respuesta != "s" and respuesta != "n":
+        sleep(0.1)
         print("El parámetro introducido no es válido, por favor inténtelo de nuevo respondiendo con 's' o 'n'.\n")
         respuesta = input("¿Quiere ver las reglas del juego? (s/n) ")
     
@@ -57,17 +58,24 @@ def reglas() -> str:
 
     if respuesta == "s":
         print("Partiendo del juego básico (Piedra, Papel y Tijeras) llevamos a cabo esta expansión, en honor a Sheldon Cooper, que incluye Lagarto y Spock.")
+        sleep(0.1)
         print("Las reglas son sencillas, el objetivo del juego es vencer al oponente con el arma seleccionada. Cada arma gana a dos armas y a su vez pierde contra dos armas.")
+        sleep(0.1)
         print("Entiéndase por 'arma' cada una de las opciones mostradas en el menú inicial.\n")
+        sleep(0.3)
         print("Las tijeras cortan el papel, el papel envuelve la piedra, la piedra aplasta al lagarto, el lagarto envenena a Spock, Spock aplasta las tijeras, las tijeras decapitan al lagarto, el lagarto devora el papel, el papel desaprueba a Spock, Spock desintegra la piedra y, como siempre, la piedra aplasta las tijeras.\n")
-        print("Para que se vea de forma más clara:")
-        print("""
-    Piedra > Tijeras y Lagarto
-    Tijeras > Lagarto y Papel
-    Lagarto > Papel y Spock
-    Papel > Spock y Piedra
-    Spock > Piedra y Tijeras        
-        """)
+        sleep(0.1)
+        print("Para que se vea de forma más clara:\n")
+        sleep(0.2)
+        print("     Piedra > Tijeras y Lagarto")
+        sleep(0.1)
+        print("     Tijeras > Lagarto y Papel")
+        sleep(0.1)
+        print("     Lagarto > Papel y Spock")
+        sleep(0.1)
+        print("     Papel > Spock y Piedra")
+        sleep(0.1)
+        print("     Spock > Piedra y Tijeras")
         sleep(0.5)
 
 def eleccion(numero: int) -> str:
@@ -121,6 +129,9 @@ victorias_usuario = 0
 victorias_ordenador = 0
 
 menu()
+
+sleep(0.3)
+
 reglas()
 
 print("_____________________________________________________________\n")
@@ -144,19 +155,28 @@ while victorias_ordenador < 3 and victorias_usuario < 3:
     if resultado == True:
         victorias_ordenador += 1
         print("El ordenador ha ganado esta partida.")
-        print("\nRecuento de puntos:\nVictorias usuario:", victorias_usuario, " |  Victorias ordenador:", victorias_ordenador)
+        sleep(0.1)
+        print("\nRecuento de puntos:")
+        sleep(0.1)
+        print("Victorias usuario:", victorias_usuario, " |  Victorias ordenador:", victorias_ordenador)
     elif resultado == False:
         victorias_usuario += 1
         print("Tú has ganado esta partida.")
-        print("\nRecuento de puntos:\nVictorias usuario:", victorias_usuario, " |  Victorias ordenador:", victorias_ordenador)
+        sleep(0.1)
+        print("\nRecuento de puntos:")
+        sleep(0.1)
+        print("Victorias usuario:", victorias_usuario, " |  Victorias ordenador:", victorias_ordenador)
     elif resultado == "empate":
         print("El resultado de esta partida ha sido", resultado)
-        print("\nRecuento de puntos:\nVictorias usuario:", victorias_usuario, " |  Victorias ordenador:", victorias_ordenador)
+        sleep(0.1)
+        print("\nRecuento de puntos:")
+        sleep(0.1)
+        print("Victorias usuario:", victorias_usuario, " |  Victorias ordenador:", victorias_ordenador)
     
     sleep(0.5)
 
     print("_____________________________________________________________\n")
-    
+
     sleep(1)
 
 if victorias_usuario > victorias_ordenador:
