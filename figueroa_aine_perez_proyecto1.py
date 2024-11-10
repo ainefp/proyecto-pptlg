@@ -261,3 +261,7 @@ while repeticion == "s" and not Finalizar:
 
 sleep(0.5)
 print("\nEspero que se haya divertido, hasta la próxima.")
+
+# Queda por implementar la llamada a las reglas (en todas partes) y la llamada a otras funciones durante la partida.
+# Preguntar si puedo mejorar los whiles.
+# Implementar lo del ordenador tramposo.
