@@ -25,7 +25,6 @@ def menu_inicial() -> str:
     str
         Menú inicial del juego
     '''
-    print("Bienvenid@ al juego, a continuación mostraremos el menú de inicio seguido del menú de elecciones.")
     print("""
     - Cuando quiera salir del juego puede responder 'a', 'abandonar' o 'salir' a cualquier pregunta en el momento en que la terminal le permita escribir.
     - Si desea ver a qué número corresponde cada arma a lo largo de las partidas, puede responder 'menue' a cualquier pregunta en el momento en que la terminal le permita escribir.
@@ -65,36 +64,26 @@ def reglas() -> str:
         Si 'respuesta' es 'n' no imprime nada
         Si 'respuesta' es cualquier otra cosa, imprime un mensaje de error y pregunta de nuevo
     '''
-    respuesta = input("¿Quiere ver las reglas del juego? (s/n) ")
-
-    while respuesta != "s" and respuesta != "n":
-        sleep(0.1)
-        print("El parámetro introducido no es válido, por favor inténtelo de nuevo respondiendo con 's' o 'n'.\n")
-        respuesta = input("¿Quiere ver las reglas del juego? (s/n) ")
-    
-    print()
-
-    if respuesta == "s":
-        print("Partiendo del juego básico (Piedra, Papel y Tijeras) llevamos a cabo esta expansión, en honor a Sheldon Cooper, que incluye Lagarto y Spock.")
-        sleep(0.1)
-        print("Las reglas son sencillas, el objetivo del juego es vencer al oponente con el arma seleccionada. Cada arma gana a dos armas y a su vez pierde contra dos armas.")
-        sleep(0.1)
-        print("Entiéndase por 'arma' cada una de las opciones mostradas en el menú inicial.\n")
-        sleep(0.3)
-        print("Las tijeras cortan el papel, el papel envuelve la piedra, la piedra aplasta al lagarto, el lagarto envenena a Spock, Spock aplasta las tijeras, las tijeras decapitan al lagarto, el lagarto devora el papel, el papel desaprueba a Spock, Spock desintegra la piedra y, como siempre, la piedra aplasta las tijeras.\n")
-        sleep(0.1)
-        print("Para que se vea de forma más clara:\n")
-        sleep(0.2)
-        print("     Piedra > Tijeras y Lagarto")
-        sleep(0.1)
-        print("     Tijeras > Lagarto y Papel")
-        sleep(0.1)
-        print("     Lagarto > Papel y Spock")
-        sleep(0.1)
-        print("     Papel > Spock y Piedra")
-        sleep(0.1)
-        print("     Spock > Piedra y Tijeras")
-        sleep(0.5)
+    print("Partiendo del juego básico (Piedra, Papel y Tijeras) llevamos a cabo esta expansión, en honor a Sheldon Cooper, que incluye Lagarto y Spock.")
+    sleep(0.1)
+    print("Las reglas son sencillas, el objetivo del juego es vencer al oponente con el arma seleccionada. Cada arma gana a dos armas y a su vez pierde contra dos armas.")
+    sleep(0.1)
+    print("Entiéndase por 'arma' cada una de las opciones mostradas en el menú inicial.\n")
+    sleep(0.3)
+    print("Las tijeras cortan el papel, el papel envuelve la piedra, la piedra aplasta al lagarto, el lagarto envenena a Spock, Spock aplasta las tijeras, las tijeras decapitan al lagarto, el lagarto devora el papel, el papel desaprueba a Spock, Spock desintegra la piedra y, como siempre, la piedra aplasta las tijeras.\n")
+    sleep(0.1)
+    print("Para que se vea de forma más clara:\n")
+    sleep(0.2)
+    print("     Piedra > Tijeras y Lagarto")
+    sleep(0.1)
+    print("     Tijeras > Lagarto y Papel")
+    sleep(0.1)
+    print("     Lagarto > Papel y Spock")
+    sleep(0.1)
+    print("     Papel > Spock y Piedra")
+    sleep(0.1)
+    print("     Spock > Piedra y Tijeras")
+    sleep(0.5)
 
 def eleccion(numero: int) -> str:
     '''
@@ -146,24 +135,23 @@ def partida(ordenador: int, usuario: int) -> bool | str:
 victorias_usuario = 0
 victorias_ordenador = 0
 
+print("Bienvenid@ al juego, a continuación mostraremos el menú de inicio seguido del menú de elecciones.")
 menu_inicial()
 menu_eleccion()
 
 sleep(0.3)
 
-reglas()
-
 repeticion = "s"
 
 while repeticion == "s":
-    repeticion = input("¿Quiere volver a jugar o desea salir? s(seguir) / a(abandonar) ")
+    respuesta = input("¿Quiere ver las reglas del juego? (s/n) ")
 
-    while repeticion != "s" and repeticion != "a" and repeticion != "abandonar" and repeticion != "salir" and repeticion != "menui" and repeticion != "ayuda" and repeticion != "help" and repeticion != "menue":
+    while respuesta != "s" and respuesta != "n" and respuesta != "a" and respuesta != "abandonar" and respuesta != "salir" and respuesta != "menui" and respuesta != "ayuda" and respuesta != "help" and respuesta != "menue":
         sleep(0.1)
-        print("El parámetro introducido no es válido, por favor inténtelo de nuevo respondiendo con 's' para seguir jugando o 'a' para abandonar.\n")
-        repeticion = input("¿Quiere volver a jugar o desea salir? s(seguir) / a(abandonar) ")
+        print("El parámetro introducido no es válido, por favor inténtelo de nuevo respondiendo con 's' o 'n'.\n")
+        respuesta = input("¿Quiere ver las reglas del juego? (s/n) ")
     
-    match repeticion:
+    match respuesta:
         case "a":
             break
         case "abandonar":
@@ -172,12 +160,21 @@ while repeticion == "s":
             break
         case "menui":
             menu_inicial()
+            respuesta = input("\n¿Quiere ver las reglas del juego? (s/n) ")
         case "ayuda":
             menu_inicial()
+            respuesta = input("\n¿Quiere ver las reglas del juego? (s/n) ")
         case "help":
             menu_inicial()
+            respuesta = input("\n¿Quiere ver las reglas del juego? (s/n) ")
         case "menue":
             menu_eleccion()
+            respuesta = input("¿Quiere ver las reglas del juego? (s/n) ")
+
+    print()
+
+    if respuesta == "s":
+        reglas()
 
     print("_____________________________________________________________\n")
 
@@ -228,6 +225,29 @@ while repeticion == "s":
         print("Felicidades!! Has ganado las tres partidas, puedes seguir jugando si lo deseas.\n")
     else:
         print("Vaya, el ordenador ha ganado las tres partidas, te deseo más suerte la próxima vez.\n")
+    
+    repeticion = input("¿Quiere volver a jugar o desea salir? s(seguir) / a(abandonar) ")
+
+    while repeticion != "s" and repeticion != "a" and repeticion != "abandonar" and repeticion != "salir" and repeticion != "menui" and repeticion != "ayuda" and repeticion != "help" and repeticion != "menue":
+        sleep(0.1)
+        print("El parámetro introducido no es válido, por favor inténtelo de nuevo respondiendo con 's' para seguir jugando o 'a' para abandonar.\n")
+        repeticion = input("¿Quiere volver a jugar o desea salir? s(seguir) / a(abandonar) ")
+    
+    match repeticion:
+        case "a":
+            break
+        case "abandonar":
+            break
+        case "salir":
+            break
+        case "menui":
+            menu_inicial()
+        case "ayuda":
+            menu_inicial()
+        case "help":
+            menu_inicial()
+        case "menue":
+            menu_eleccion()
 
 sleep(0.5)
-print("Espero que se haya divertido, hasta la próxima.")
+print("\nEspero que se haya divertido, hasta la próxima.")
