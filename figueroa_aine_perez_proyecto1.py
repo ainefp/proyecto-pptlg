@@ -3,14 +3,27 @@ from time import sleep
 
 def num_aleatorio() -> int:
     '''
-    Genera y devuelve un número aleatorio entre 0 y 2 (ambos incluídos)
+    Genera y devuelve un número aleatorio entre 0 y 4 (ambos incluídos)
+
+    Parámetros
+    No recibe nada
+
+    Devuelve
+    int
+        Número aleatorio entre 0 y 4
     '''
-    return randint(0, 2)
+    return randint(0, 4)
 
 def menu() -> str:
     '''
     Función que genera un menú de presentación antes de comenzar el juego.
-    Pregunta al usuario si quiere conocer las reglas para mostrar más información
+
+    Parámetros
+    No recibe nada
+
+    Devuelve
+    str
+        Menú inicial del juego
     '''
     print("Bienvenid@ al juego, a continuación mostraremos el menú de inicio.")
     print("""
@@ -21,33 +34,54 @@ def menu() -> str:
     5. Tijeras
     """)
 
-    # para lagart-spock usamos %5 porque cada 1 gana a los 2 siguientes
-
 def reglas() -> str:
     '''
-    Reglas del juego.
+    Pregunta al usuario si quiere conocer las reglas del juego para mostrar, o no, más información.
+    
+    Parámetros
+    No recibe nada
+
+    Devuelve
+    str
+        Si 'respuesta' es 's' imprime las reglas del juego
+        Si 'respuesta' es 'n' no imprime nada
+        Si 'respuesta' es cualquier otra cosa, imprime un mensaje de error y pregunta de nuevo
     '''
     respuesta = input("¿Quiere ver las reglas del juego? (s/n) ")
+
     while respuesta != "s" and respuesta != "n":
         print("El parámetro introducido no es válido, por favor inténtelo de nuevo respondiendo con 's' o 'n'.\n")
         respuesta = input("¿Quiere ver las reglas del juego? (s/n) ")
     
     print()
+
     if respuesta == "s":
         print("Partiendo del juego básico (Piedra, Papel y Tijeras) llevamos a cabo esta expansión, en honor a Sheldon Cooper, que incluye Lagarto y Spock.")
         print("Las reglas son sencillas, el objetivo del juego es vencer al oponente con el arma seleccionada. Cada arma gana a dos armas y a su vez pierde contra dos armas.")
         print("Entiéndase por 'arma' cada una de las opciones mostradas en el menú inicial.\n")
         print("Las tijeras cortan el papel, el papel envuelve la piedra, la piedra aplasta al lagarto, el lagarto envenena a Spock, Spock aplasta las tijeras, las tijeras decapitan al lagarto, el lagarto devora el papel, el papel desaprueba a Spock, Spock desintegra la piedra y, como siempre, la piedra aplasta las tijeras.\n")
-        print("Para que se vea de forma más clara:\n")
+        print("Para que se vea de forma más clara:")
         print("""
-bla bla
-              """)
+    Piedra > Tijeras y Lagarto
+    Tijeras > Lagarto y Papel
+    Lagarto > Papel y Spock
+    Papel > Spock y Piedra
+    Spock > Piedra y Tijeras        
+        """)
         sleep(0.5)
 
 def eleccion(numero: int) -> str:
     '''
-    Transforma el número que se le indique en uno de los nombres de las jugadas.
+    Transforma el número que se le indique en uno de los nombres de las jugadas. Recibe por número tanto la elección del usuario como la del ordenador.
     Esta función no tiene mayor relevancia para el desempeño del código, su utilidad es favorecer a la claridad de los usuarios.
+
+    Parámetros
+    numero: int
+        Número a transformar
+
+    Devuelve
+    str
+        Nombre del arma seleccionada
     '''
     match numero:
         case 0:
@@ -62,9 +96,24 @@ def eleccion(numero: int) -> str:
             return "tijeras"
 
 def partida(ordenador: int, usuario: int) -> bool | str:
+    '''
+    Ejecución de la partida. Recibe en primer lugar el número del arma seleccionada por el ordenador, seguido de la selección del usuario.
+
+    Parámetros
+    ordenador: int
+        Selección del ordenador
+    usuario: int
+        Selección del usuario
+
+    Devuelve
+    str
+        Cuando el resultado de la partida es "empate"
+    bool
+        True si gana el ordenador, False si gana el usuario
+    '''
     if ordenador == usuario:
         return "empate"
-    elif ordenador == (usuario + 1) % 5 or ordenador == (usuario + 2) % 5: # Con esta fórmula gana el ordenador
+    elif ordenador == (usuario + 1) % 5 or ordenador == (usuario + 2) % 5: # Con estas fórmulas gana el ordenador
         return True
     return False
 
@@ -104,7 +153,10 @@ while victorias_ordenador < 3 and victorias_usuario < 3:
         print("El resultado de esta partida ha sido", resultado)
         print("\nRecuento de puntos:\nVictorias usuario:", victorias_usuario, " |  Victorias ordenador:", victorias_ordenador)
     
+    sleep(0.5)
+
     print("_____________________________________________________________\n")
+    
     sleep(1)
 
 if victorias_usuario > victorias_ordenador:
