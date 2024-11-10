@@ -14,9 +14,9 @@ def num_aleatorio() -> int:
     '''
     return randint(0, 4)
 
-def menu() -> str:
+def menu_inicial() -> str:
     '''
-    Función que genera un menú de presentación antes de comenzar el juego.
+    Genera un menú de presentación antes de comenzar el juego.
 
     Parámetros
     No recibe nada
@@ -25,7 +25,25 @@ def menu() -> str:
     str
         Menú inicial del juego
     '''
-    print("Bienvenid@ al juego, a continuación mostraremos el menú de inicio.")
+    print("Bienvenid@ al juego, a continuación mostraremos el menú de inicio seguido del menú de elecciones.")
+    print("""
+    - Cuando quiera salir del juego puede responder 'a', 'abandonar' o 'salir' a cualquier pregunta en el momento en que la terminal le permita escribir.
+    - Si desea ver a qué número corresponde cada arma a lo largo de las partidas, puede responder 'menue' a cualquier pregunta en el momento en que la terminal le permita escribir.
+    - También puede acceder a este menú respondiendo 'menui', 'ayuda' o 'help' a cualquier pregunta en el momento en que la terminal le permita escribir si lo desea.
+    - Para continuar jugando presione 's' cuando se le indique.
+    """, end="")
+
+def menu_eleccion() -> str:
+    '''
+    Muestra el menú de elecciones, el usuario lo utiliza para ver a qué arma corresponde cada número.
+
+    Parámetros
+    No recibe nada
+
+    Devuelve
+    str
+        Menú de elección de arma
+    '''
     print("""
     1. Piedra
     2. Spock
@@ -128,58 +146,88 @@ def partida(ordenador: int, usuario: int) -> bool | str:
 victorias_usuario = 0
 victorias_ordenador = 0
 
-menu()
+menu_inicial()
+menu_eleccion()
 
 sleep(0.3)
 
 reglas()
 
-print("_____________________________________________________________\n")
+repeticion = "s"
 
-while victorias_ordenador < 3 and victorias_usuario < 3:
-    opcion_usuario = int(input("Elija una de las opciones: ")) - 1
+while repeticion == "s":
+    repeticion = input("¿Quiere volver a jugar o desea salir? s(seguir) / a(abandonar) ")
 
-    while opcion_usuario < 0 or opcion_usuario > 4:
-        print("El parámetro introducido no es válido, debe introducir un número entero comprendido entre 1 y 3, por favor inténtelo de nuevo.\n")
-        opcion_usuario = int(input("Elija una de las opciones: ")) - 1
-
-    opcion_ordenador = num_aleatorio()
-
-    sleep(0.5)
-    print("Tu elección ha sido", eleccion(opcion_usuario), "y la del ordenador", eleccion(opcion_ordenador), "\n")
-
-    sleep(1)
-
-    resultado = partida(opcion_ordenador, opcion_usuario)
-
-    if resultado == True:
-        victorias_ordenador += 1
-        print("El ordenador ha ganado esta partida.")
+    while repeticion != "s" and repeticion != "a" and repeticion != "abandonar" and repeticion != "salir" and repeticion != "menui" and repeticion != "ayuda" and repeticion != "help" and repeticion != "menue":
         sleep(0.1)
-        print("\nRecuento de puntos:")
-        sleep(0.1)
-        print("Victorias usuario:", victorias_usuario, " |  Victorias ordenador:", victorias_ordenador)
-    elif resultado == False:
-        victorias_usuario += 1
-        print("Tú has ganado esta partida.")
-        sleep(0.1)
-        print("\nRecuento de puntos:")
-        sleep(0.1)
-        print("Victorias usuario:", victorias_usuario, " |  Victorias ordenador:", victorias_ordenador)
-    elif resultado == "empate":
-        print("El resultado de esta partida ha sido", resultado)
-        sleep(0.1)
-        print("\nRecuento de puntos:")
-        sleep(0.1)
-        print("Victorias usuario:", victorias_usuario, " |  Victorias ordenador:", victorias_ordenador)
+        print("El parámetro introducido no es válido, por favor inténtelo de nuevo respondiendo con 's' para seguir jugando o 'a' para abandonar.\n")
+        repeticion = input("¿Quiere volver a jugar o desea salir? s(seguir) / a(abandonar) ")
     
-    sleep(0.5)
+    match repeticion:
+        case "a":
+            break
+        case "abandonar":
+            break
+        case "salir":
+            break
+        case "menui":
+            menu_inicial()
+        case "ayuda":
+            menu_inicial()
+        case "help":
+            menu_inicial()
+        case "menue":
+            menu_eleccion()
 
     print("_____________________________________________________________\n")
 
-    sleep(1)
+    while victorias_ordenador < 3 and victorias_usuario < 3:
+        opcion_usuario = int(input("Elija una de las opciones: ")) - 1
 
-if victorias_usuario > victorias_ordenador:
-    print("Felicidades!! Has ganado las tres partidas, puedes seguir jugando si lo deseas.\n")
-else:
-    print("Vaya, el ordenador ha ganado las tres partidas, te deseo más suerte la próxima vez.\n")
+        while opcion_usuario < 0 or opcion_usuario > 4:
+            print("El parámetro introducido no es válido, debe introducir un número entero comprendido entre 1 y 3, por favor inténtelo de nuevo.\n")
+            opcion_usuario = int(input("Elija una de las opciones: ")) - 1
+
+        opcion_ordenador = num_aleatorio()
+
+        sleep(0.5)
+        print("Tu elección ha sido", eleccion(opcion_usuario), "y la del ordenador", eleccion(opcion_ordenador), "\n")
+
+        sleep(1)
+
+        resultado = partida(opcion_ordenador, opcion_usuario)
+
+        if resultado == True:
+            victorias_ordenador += 1
+            print("El ordenador ha ganado esta partida.")
+            sleep(0.1)
+            print("\nRecuento de puntos:")
+            sleep(0.1)
+            print("Victorias usuario:", victorias_usuario, " |  Victorias ordenador:", victorias_ordenador)
+        elif resultado == False:
+            victorias_usuario += 1
+            print("Tú has ganado esta partida.")
+            sleep(0.1)
+            print("\nRecuento de puntos:")
+            sleep(0.1)
+            print("Victorias usuario:", victorias_usuario, " |  Victorias ordenador:", victorias_ordenador)
+        elif resultado == "empate":
+            print("El resultado de esta partida ha sido", resultado)
+            sleep(0.1)
+            print("\nRecuento de puntos:")
+            sleep(0.1)
+            print("Victorias usuario:", victorias_usuario, " |  Victorias ordenador:", victorias_ordenador)
+        
+        sleep(0.5)
+
+        print("_____________________________________________________________\n")
+
+        sleep(1)
+
+    if victorias_usuario > victorias_ordenador:
+        print("Felicidades!! Has ganado las tres partidas, puedes seguir jugando si lo deseas.\n")
+    else:
+        print("Vaya, el ordenador ha ganado las tres partidas, te deseo más suerte la próxima vez.\n")
+
+sleep(0.5)
+print("Espero que se haya divertido, hasta la próxima.")
