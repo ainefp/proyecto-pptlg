@@ -26,9 +26,10 @@ def menu_inicial() -> str:
         Menú inicial del juego
     '''
     print("""
-    - Cuando quiera salir del juego puede responder 'a', 'abandonar' o 'salir' a cualquier pregunta en el momento en que la terminal le permita escribir.
-    - Si desea ver a qué número corresponde cada arma a lo largo de las partidas, puede responder 'menue' a cualquier pregunta en el momento en que la terminal le permita escribir.
-    - También puede acceder a este menú respondiendo 'menui', 'ayuda' o 'help' a cualquier pregunta en el momento en que la terminal le permita escribir si lo desea.
+    - A lo largo del juego puede responder con palabras clave a cualquier pregunta en el momento en que la terminal le permita escribir. Dichas palabras son las siguientes:
+    - Cuando quiera salir del juego puede escribir 'a', 'abandonar' o 'salir'.
+    - Si desea ver a qué número corresponde cada arma a lo largo de las partidas, puede escribir 'menue'.
+    - También puede acceder a este menú escribiendo 'menui', 'ayuda' o 'help'.
     - Para continuar jugando presione 's' cuando se le indique.
     """, end="")
     sleep(0.1)
@@ -89,15 +90,15 @@ def reglas() -> str:
 
 def opcion_ayuda(respuesta: str) -> bool:
     '''
-    Comprueba
+    Comprueba si la palabra que se le pasa es una palabra clave.
 
     Parámetros
     respuesta
-        fdnf
+        Palabra que introduce el usuario
 
     Devuelve
     bool
-        True blabla
+        True si la palabra corresponde a alguna acción, False en caso contrario.
     '''
     match respuesta:
         case "a" | "abandonar" | "salir" | "menui" | "ayuda" | "help" | "menue" | "reglas":
@@ -107,15 +108,16 @@ def opcion_ayuda(respuesta: str) -> bool:
 
 def opcion_usuario_partida(respuesta: str) -> bool:
     '''
-    Comprueba
+    Comprueba si el número que se le pasa se encuentra en el intervalo entre 0 y 4 incluídos.
+    Utilizamos esta función porque pedimos el número como str y no como int para permitir que el usuario escriba palabras clave.
 
     Parámetros
     respuesta
-        fdnf
+        Número que introduce el usuario
 
     Devuelve
     bool
-        True blabla
+        True si el número se encuentra entre 0 y 4, False en caso contrario.
     '''
     match respuesta:
         case "0" | "1" | "2" | "3" | "4":
@@ -170,7 +172,7 @@ def partida(ordenador: int, usuario: int) -> bool | str:
         return True
     return False
 
-Finalizar = False
+Finalizado = False
 
 print("Bienvenid@ al juego, a continuación mostraremos el menú de inicio seguido del menú de elecciones.")
 
@@ -180,11 +182,11 @@ menu_eleccion()
 respuesta = ""
 respuesta_valida = False
 
-while respuesta_valida == False:
+while not respuesta_valida:
     respuesta = input("\n¿Quiere ver las reglas del juego? [s/n] ")
 
-    if respuesta != "s" and respuesta != "n" and opcion_ayuda(respuesta) == False:
-        print("El parámetro introducido no es válido, por favor inténtelo de nuevo respondiendo con 's' o 'n'.\n")
+    if respuesta != "s" and respuesta != "n" and not opcion_ayuda(respuesta):
+        print("El parámetro introducido no es válido, por favor inténtelo de nuevo respondiendo con 's', 'n' o alguna palabra clave.\n")
 
     match respuesta:
         case "s" | "reglas":
@@ -194,17 +196,16 @@ while respuesta_valida == False:
         case "n":
             respuesta_valida = True
         case "a" | "abandonar" | "salir":
-            Finalizar = True
+            respuesta_valida = True
+            Finalizado = True
         case "menui" | "ayuda" | "help":
             menu_inicial()
-            respuesta = ""
         case "menue":
             menu_eleccion()
-            respuesta = ""
 
 sleep(0.2)
 
-while not Finalizar:
+while not Finalizado:
     victorias_usuario = 0
     victorias_ordenador = 0
 
@@ -237,20 +238,21 @@ while not Finalizar:
         opcion_ordenador = num_aleatorio()
 
         sleep(0.3)
+
         print("Tu elección ha sido", eleccion(opcion_usuario), "y la del ordenador", eleccion(opcion_ordenador), "\n")
 
         sleep(0.6)
 
         resultado = partida(opcion_ordenador, opcion_usuario)
 
-        if resultado == True:
+        if resultado:
             victorias_ordenador += 1
             print("El ordenador ha ganado esta partida.")
             sleep(0.1)
             print("\nRecuento de puntos:")
             sleep(0.1)
             print("Victorias usuario:", victorias_usuario, " |  Victorias ordenador:", victorias_ordenador)
-        elif resultado == False:
+        elif not resultado:
             victorias_usuario += 1
             print("Tú has ganado esta partida.")
             sleep(0.1)
@@ -281,28 +283,27 @@ while not Finalizar:
     repeticion = ""
     repeticion_valida = False
 
-    while repeticion_valida == False:
-        repeticion = input("\n¿Quiere volver a jugar o desea salir? s(seguir) / a(abandonar) ")
+    while not repeticion_valida:
+        repeticion = input("\n¿Quiere volver a jugar o desea salir? s(seguir) / a(abandonar): ")
 
-        if repeticion != "s" and opcion_ayuda(repeticion) == False:
-            print("El parámetro introducido no es válido, por favor inténtelo de nuevo respondiendo con 's' para seguir jugando o 'a' para abandonar.\n")
+        if repeticion != "s" and not opcion_ayuda(repeticion):
+            print("El parámetro introducido no es válido, por favor inténtelo de nuevo respondiendo con 's' para seguir jugando, 'a' para abandonar o una palabra clave.\n")
 
         match repeticion:
             case "s":
+                repeticion_valida = True
                 sleep(0.4)
                 print("_____________________________________________________________")
+            case "a" | "abandonar" | "salir":
+                repeticion_valida = True
+                Finalizado = True
             case "reglas":
                 print()
                 reglas()
-                repeticion = input("\n¿Quiere volver a jugar o desea salir? s(seguir) / a(abandonar) ")
-            case "a" | "abandonar" | "salir":
-                Finalizar = True
             case "menui" | "ayuda" | "help":
                 menu_inicial()
-                repeticion = ""
             case "menue":
                 menu_eleccion()
-                repeticion = ""
     
 sleep(0.5)
 print("\nEspero que se haya divertido, hasta la próxima.")
