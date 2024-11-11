@@ -88,6 +88,16 @@ def reglas() -> str:
     sleep(0.5)
 
 def opcion_ayuda(respuesta: str) -> bool:
+    '''
+    Comprueba
+
+    Parámetros
+    No recibe nada
+
+    Devuelve
+    int
+        Número aleatorio entre 0 y 4
+    '''
     match respuesta:
         case "a":
             return
@@ -104,6 +114,21 @@ def opcion_ayuda(respuesta: str) -> bool:
         case "menue":
             return
         case "reglas":
+            return
+        case _:
+            return False
+
+def opcion_usuario_partida(respuesta: str) -> bool:
+    match respuesta:
+        case "0":
+            return
+        case "1":
+            return
+        case "2":
+            return
+        case "3":
+            return
+        case "4":
             return
         case _:
             return False
@@ -163,39 +188,30 @@ print("Bienvenid@ al juego, a continuación mostraremos el menú de inicio segui
 menu_inicial()
 menu_eleccion()
 
-respuesta = input("¿Quiere ver las reglas del juego? [s/n] ")
+respuesta = ""
+respuesta_valida = False
 
-while respuesta != "s" and respuesta != "n" and opcion_ayuda(respuesta) == False:
-    sleep(0.1)
-    print("El parámetro introducido no es válido, por favor inténtelo de nuevo respondiendo con 's' o 'n'.\n")
+while respuesta_valida == False:
     respuesta = input("¿Quiere ver las reglas del juego? [s/n] ")
-else:
+
+    if respuesta != "s" and respuesta != "n" and opcion_ayuda(respuesta) == False:
+        print("El parámetro introducido no es válido, por favor inténtelo de nuevo respondiendo con 's' o 'n'.\n")
+
     match respuesta:
-        case "a":
-            repeticion = "n"
-        case "abandonar":
-            repeticion = "n"
-        case "salir":
-            repeticion = "n"
-        case "menui":
-            menu_inicial()
-            respuesta = input("\n¿Quiere ver las reglas del juego? (s/n) ")
-        case "ayuda":
-            menu_inicial()
-            respuesta = input("\n¿Quiere ver las reglas del juego? (s/n) ")
-        case "help":
-            menu_inicial()
-            respuesta = input("\n¿Quiere ver las reglas del juego? (s/n) ")
-        case "menue":
-            menu_eleccion()
-            respuesta = input("¿Quiere ver las reglas del juego? (s/n) ")
-        case "reglas":
+        case "s" | "reglas":
             print()
             reglas()
-
-if respuesta == "s":
-    print()
-    reglas()
+            respuesta_valida = True
+        case "n":
+            respuesta_valida = True
+        case "a" | "abandonar" | "salir":
+            repeticion = "n"
+        case "menui" | "ayuda" | "help":
+            menu_inicial()
+            respuesta = ""
+        case "menue":
+            menu_eleccion()
+            respuesta = ""
 
 sleep(0.2)
 
@@ -208,18 +224,37 @@ while repeticion == "s" and not Finalizar:
     sleep(0.1)
 
     while victorias_ordenador < 3 and victorias_usuario < 3:
-        opcion_usuario = int(input("Elija una de las opciones: ")) - 1
+        pregunta_usuario = input("Elija una de las opciones: ")
 
-        while opcion_usuario < 0 or opcion_usuario > 4:
+        while opcion_usuario_partida(pregunta_usuario) and opcion_ayuda(pregunta_usuario) == False:
             print("El parámetro introducido no es válido, debe introducir un número entero comprendido entre 1 y 3, por favor inténtelo de nuevo.\n")
-            opcion_usuario = int(input("Elija una de las opciones: ")) - 1
+            pregunta_usuario = input("Elija una de las opciones: ")
+        
+        match pregunta_usuario:
+            case "0" | "1" | "2" | "3" | "4":
+                opcion_usuario = int(pregunta_usuario) - 1
+            case "reglas":
+                print()
+                reglas()
+            case "a":
+                break
+            case "abandonar":
+                break
+            case "salir":
+                break
+            case "menui" | "ayuda" | "help":
+                menu_inicial()
+                opcion_usuario = input(int("Elija una de las opciones: " - 1))
+            case "menue":
+                menu_eleccion()
+                opcion_usuario = input(int("Elija una de las opciones: " - 1))
 
         opcion_ordenador = num_aleatorio()
 
         sleep(0.3)
         print("Tu elección ha sido", eleccion(opcion_usuario), "y la del ordenador", eleccion(opcion_ordenador), "\n")
 
-        sleep(1)
+        sleep(0.6)
 
         resultado = partida(opcion_ordenador, opcion_usuario)
 
@@ -257,9 +292,10 @@ while repeticion == "s" and not Finalizar:
     
 
     sleep(0.5)
+
     repeticion = input("¿Quiere volver a jugar o desea salir? s(seguir) / a(abandonar) ")
 
-    while repeticion != "s" and repeticion != "a" and repeticion != "abandonar" and repeticion != "salir" and repeticion != "menui" and repeticion != "ayuda" and repeticion != "help" and repeticion != "menue":
+    while repeticion != "s" and opcion_ayuda(repeticion) == False:
         sleep(0.1)
         print("El parámetro introducido no es válido, por favor inténtelo de nuevo respondiendo con 's' para seguir jugando o 'a' para abandonar.\n")
         repeticion = input("¿Quiere volver a jugar o desea salir? s(seguir) / a(abandonar) ")
@@ -268,24 +304,26 @@ while repeticion == "s" and not Finalizar:
             case "s":
                 sleep(0.4)
                 print("_____________________________________________________________")
+            case "reglas":
+                print()
+                reglas()
+                repeticion = input("\n¿Quiere volver a jugar o desea salir? s(seguir) / a(abandonar) ")
             case "a":
                 Finalizar = True
             case "abandonar":
                 Finalizar = True
             case "salir":
                 Finalizar = True
-            case "menui":
+            case "menui" | "ayuda" | "help":
                 menu_inicial()
-            case "ayuda":
-                menu_inicial()
-            case "help":
-                menu_inicial()
+                repeticion = input("¿Quiere volver a jugar o desea salir? s(seguir) / a(abandonar) ")
             case "menue":
                 menu_eleccion()
+                repeticion = input("¿Quiere volver a jugar o desea salir? s(seguir) / a(abandonar) ")
 
 sleep(0.5)
 print("\nEspero que se haya divertido, hasta la próxima.")
 
-# Queda por implementar la llamada a las reglas (en todas partes) y la llamada a otras funciones durante la partida.
+# Queda por implementar la llamada a funciones durante la partida.
 # Preguntar si puedo mejorar los whiles.
 # Implementar lo del ordenador tramposo.
