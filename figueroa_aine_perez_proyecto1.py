@@ -87,6 +87,27 @@ def reglas() -> str:
     print("     Spock > Piedra y Tijeras")
     sleep(0.5)
 
+def opcion_ayuda(respuesta: str) -> bool:
+    match respuesta:
+        case "a":
+            return
+        case "abandonar":
+            return
+        case "salir":
+            return
+        case "menui":
+            return
+        case "ayuda":
+            return
+        case "help":
+            return
+        case "menue":
+            return
+        case "reglas":
+            return
+        case _:
+            return False
+
 def eleccion(numero: int) -> str:
     '''
     Transforma el número que se le indique en uno de los nombres de las jugadas. Recibe por número tanto la elección del usuario como la del ordenador.
@@ -142,12 +163,12 @@ print("Bienvenid@ al juego, a continuación mostraremos el menú de inicio segui
 menu_inicial()
 menu_eleccion()
 
-respuesta = input("¿Quiere ver las reglas del juego? (s/n) ")
+respuesta = input("¿Quiere ver las reglas del juego? [s/n] ")
 
-while respuesta != "s" and respuesta != "n" and respuesta != "a" and respuesta != "abandonar" and respuesta != "salir" and respuesta != "menui" and respuesta != "ayuda" and respuesta != "help" and respuesta != "menue":
+while respuesta != "s" and respuesta != "n" and opcion_ayuda(respuesta) == False:
     sleep(0.1)
     print("El parámetro introducido no es válido, por favor inténtelo de nuevo respondiendo con 's' o 'n'.\n")
-    respuesta = input("¿Quiere ver las reglas del juego? (s/n) ")
+    respuesta = input("¿Quiere ver las reglas del juego? [s/n] ")
 else:
     match respuesta:
         case "a":
@@ -168,10 +189,13 @@ else:
         case "menue":
             menu_eleccion()
             respuesta = input("¿Quiere ver las reglas del juego? (s/n) ")
+        case "reglas":
+            print()
+            reglas()
 
-    if respuesta == "s":
-        print()
-        reglas()
+if respuesta == "s":
+    print()
+    reglas()
 
 sleep(0.2)
 
