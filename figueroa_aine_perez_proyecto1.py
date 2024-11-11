@@ -92,43 +92,33 @@ def opcion_ayuda(respuesta: str) -> bool:
     Comprueba
 
     Parámetros
-    No recibe nada
+    respuesta
+        fdnf
 
     Devuelve
-    int
-        Número aleatorio entre 0 y 4
+    bool
+        True blabla
     '''
     match respuesta:
-        case "a":
-            return
-        case "abandonar":
-            return
-        case "salir":
-            return
-        case "menui":
-            return
-        case "ayuda":
-            return
-        case "help":
-            return
-        case "menue":
-            return
-        case "reglas":
+        case "a" | "abandonar" | "salir" | "menui" | "ayuda" | "help" | "menue" | "reglas":
             return
         case _:
             return False
 
 def opcion_usuario_partida(respuesta: str) -> bool:
+    '''
+    Comprueba
+
+    Parámetros
+    respuesta
+        fdnf
+
+    Devuelve
+    bool
+        True blabla
+    '''
     match respuesta:
-        case "0":
-            return
-        case "1":
-            return
-        case "2":
-            return
-        case "3":
-            return
-        case "4":
+        case "0" | "1" | "2" | "3" | "4":
             return
         case _:
             return False
@@ -181,7 +171,6 @@ def partida(ordenador: int, usuario: int) -> bool | str:
     return False
 
 Finalizar = False
-repeticion = "s"
 
 print("Bienvenid@ al juego, a continuación mostraremos el menú de inicio seguido del menú de elecciones.")
 
@@ -192,7 +181,7 @@ respuesta = ""
 respuesta_valida = False
 
 while respuesta_valida == False:
-    respuesta = input("¿Quiere ver las reglas del juego? [s/n] ")
+    respuesta = input("\n¿Quiere ver las reglas del juego? [s/n] ")
 
     if respuesta != "s" and respuesta != "n" and opcion_ayuda(respuesta) == False:
         print("El parámetro introducido no es válido, por favor inténtelo de nuevo respondiendo con 's' o 'n'.\n")
@@ -205,7 +194,7 @@ while respuesta_valida == False:
         case "n":
             respuesta_valida = True
         case "a" | "abandonar" | "salir":
-            repeticion = "n"
+            Finalizar = True
         case "menui" | "ayuda" | "help":
             menu_inicial()
             respuesta = ""
@@ -215,7 +204,7 @@ while respuesta_valida == False:
 
 sleep(0.2)
 
-while repeticion == "s" and not Finalizar:
+while not Finalizar:
     victorias_usuario = 0
     victorias_ordenador = 0
 
@@ -236,11 +225,7 @@ while repeticion == "s" and not Finalizar:
             case "reglas":
                 print()
                 reglas()
-            case "a":
-                break
-            case "abandonar":
-                break
-            case "salir":
+            case "a" | "abandonar" | "salir":
                 break
             case "menui" | "ayuda" | "help":
                 menu_inicial()
@@ -293,13 +278,15 @@ while repeticion == "s" and not Finalizar:
 
     sleep(0.5)
 
-    repeticion = input("¿Quiere volver a jugar o desea salir? s(seguir) / a(abandonar) ")
+    repeticion = ""
+    repeticion_valida = False
 
-    while repeticion != "s" and opcion_ayuda(repeticion) == False:
-        sleep(0.1)
-        print("El parámetro introducido no es válido, por favor inténtelo de nuevo respondiendo con 's' para seguir jugando o 'a' para abandonar.\n")
-        repeticion = input("¿Quiere volver a jugar o desea salir? s(seguir) / a(abandonar) ")
-    else:
+    while repeticion_valida == False:
+        repeticion = input("\n¿Quiere volver a jugar o desea salir? s(seguir) / a(abandonar) ")
+
+        if repeticion != "s" and opcion_ayuda(repeticion) == False:
+            print("El parámetro introducido no es válido, por favor inténtelo de nuevo respondiendo con 's' para seguir jugando o 'a' para abandonar.\n")
+
         match repeticion:
             case "s":
                 sleep(0.4)
@@ -308,19 +295,15 @@ while repeticion == "s" and not Finalizar:
                 print()
                 reglas()
                 repeticion = input("\n¿Quiere volver a jugar o desea salir? s(seguir) / a(abandonar) ")
-            case "a":
-                Finalizar = True
-            case "abandonar":
-                Finalizar = True
-            case "salir":
+            case "a" | "abandonar" | "salir":
                 Finalizar = True
             case "menui" | "ayuda" | "help":
                 menu_inicial()
-                repeticion = input("¿Quiere volver a jugar o desea salir? s(seguir) / a(abandonar) ")
+                repeticion = ""
             case "menue":
                 menu_eleccion()
-                repeticion = input("¿Quiere volver a jugar o desea salir? s(seguir) / a(abandonar) ")
-
+                repeticion = ""
+    
 sleep(0.5)
 print("\nEspero que se haya divertido, hasta la próxima.")
 
