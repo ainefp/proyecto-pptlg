@@ -276,7 +276,6 @@ while not Finalizado:
     else:
         print("Vaya, el ordenador ha ganado las tres partidas, te deseo más suerte la próxima vez.\n\n")
     
-
     sleep(0.5)
 
     repeticion = ""
@@ -307,6 +306,6 @@ while not Finalizado:
 sleep(0.5)
 print("\nEspero que se haya divertido, hasta la próxima.")
 
-# Queda por implementar la llamada a funciones durante la partida.
-# Preguntar si puedo mejorar los whiles.
-# Implementar lo del ordenador tramposo.
+#   SOLUCIONAR: yo spock y pc spock = empate
+#  Meter función con bucle for para imprimir letra por letra el textp que le pase.
+#  Implementar lo del ordenador tramposo.
