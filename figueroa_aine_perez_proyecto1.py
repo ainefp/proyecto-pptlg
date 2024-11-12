@@ -102,7 +102,7 @@ def opcion_ayuda(respuesta: str) -> bool:
     '''
     match respuesta:
         case "a" | "abandonar" | "salir" | "menui" | "ayuda" | "help" | "menue" | "reglas":
-            return
+            return True
         case _:
             return False
 
@@ -119,11 +119,7 @@ def opcion_usuario_partida(respuesta: str) -> bool:
     bool
         True si el número se encuentra entre 0 y 4, False en caso contrario.
     '''
-    match respuesta:
-        case "0" | "1" | "2" | "3" | "4":
-            return
-        case _:
-            return False
+    return respuesta in ["1", "2", "3", "4", "5"]
 
 def eleccion(numero: int) -> str:
     '''
@@ -216,24 +212,25 @@ while not Finalizado:
     while victorias_ordenador < 3 and victorias_usuario < 3:
         pregunta_usuario = input("Elija una de las opciones: ")
 
-        while opcion_usuario_partida(pregunta_usuario) and opcion_ayuda(pregunta_usuario) == False:
+        while not opcion_usuario_partida(pregunta_usuario) and not opcion_ayuda(pregunta_usuario):
             print("El parámetro introducido no es válido, debe introducir un número entero comprendido entre 1 y 3, por favor inténtelo de nuevo.\n")
             pregunta_usuario = input("Elija una de las opciones: ")
         
-        match pregunta_usuario:
-            case "0" | "1" | "2" | "3" | "4":
-                opcion_usuario = int(pregunta_usuario) - 1
-            case "reglas":
-                print()
-                reglas()
-            case "a" | "abandonar" | "salir":
-                break
-            case "menui" | "ayuda" | "help":
-                menu_inicial()
-                opcion_usuario = input(int("Elija una de las opciones: " - 1))
-            case "menue":
-                menu_eleccion()
-                opcion_usuario = input(int("Elija una de las opciones: " - 1))
+        if opcion_usuario_partida(pregunta_usuario):
+            opcion_usuario = int(pregunta_usuario) - 1
+        else:
+            match pregunta_usuario:
+                case "reglas":
+                    print()
+                    reglas()
+                case "a" | "abandonar" | "salir":
+                    break
+                case "menui" | "ayuda" | "help":
+                    menu_inicial()
+                    opcion_usuario = input(int("Elija una de las opciones: " - 1))
+                case "menue":
+                    menu_eleccion()
+                    opcion_usuario = input(int("Elija una de las opciones: " - 1))
 
         opcion_ordenador = num_aleatorio()
 
