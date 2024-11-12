@@ -210,28 +210,30 @@ while not Finalizado:
     sleep(0.1)
 
     while victorias_ordenador < 3 and victorias_usuario < 3:
-        pregunta_usuario = input("Elija una de las opciones: ")
+        pregunta_usuario = ""
+        pregunta_uvalida = False
 
-        while not opcion_usuario_partida(pregunta_usuario) and not opcion_ayuda(pregunta_usuario):
-            print("El parámetro introducido no es válido, debe introducir un número entero comprendido entre 1 y 3, por favor inténtelo de nuevo.\n")
+        while not pregunta_uvalida:
             pregunta_usuario = input("Elija una de las opciones: ")
-        
-        if opcion_usuario_partida(pregunta_usuario):
-            opcion_usuario = int(pregunta_usuario) - 1
-        else:
+
+            if not opcion_usuario_partida(pregunta_usuario) and not opcion_ayuda(pregunta_usuario):
+                print("El parámetro introducido no es válido, debe introducir un número entero comprendido entre 1 y 3, por favor inténtelo de nuevo.\n")
+
             match pregunta_usuario:
+                case opcion_usuario_partida(pregunta_usuario):
+                    opcion_usuario = int(pregunta_usuario) - 1
+                    pregunta_uvalida = True
                 case "reglas":
                     print()
                     reglas()
                 case "a" | "abandonar" | "salir":
+                    respuesta_valida = True
                     break
                 case "menui" | "ayuda" | "help":
                     menu_inicial()
-                    opcion_usuario = input(int("Elija una de las opciones: " - 1))
                 case "menue":
                     menu_eleccion()
-                    opcion_usuario = input(int("Elija una de las opciones: " - 1))
-
+        
         opcion_ordenador = num_aleatorio()
 
         sleep(0.3)
