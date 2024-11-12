@@ -1,6 +1,11 @@
 from random import randint
 from time import sleep
 
+def paso_a_paso(texto: str) -> str:
+    for letra in range(texto):
+        print(letra)
+        sleep(0.1)
+
 def num_aleatorio() -> int:
     '''
     Genera y devuelve un número aleatorio entre 0 y 4 (ambos incluídos)
@@ -32,7 +37,6 @@ def menu_inicial() -> str:
     - También puede acceder a este menú escribiendo 'menui', 'ayuda' o 'help'.
     - Para continuar jugando presione 's' cuando se le indique.
     """, end="")
-    sleep(0.1)
 
 def menu_eleccion() -> str:
     '''
@@ -52,7 +56,6 @@ def menu_eleccion() -> str:
     4. Lagarto
     5. Tijeras
     """)
-    sleep(0.1)
 
 def reglas() -> str:
     '''
@@ -67,26 +70,18 @@ def reglas() -> str:
         Si 'respuesta' es 'n' no imprime nada
         Si 'respuesta' es cualquier otra cosa, imprime un mensaje de error y pregunta de nuevo
     '''
-    print("Partiendo del juego básico (Piedra, Papel y Tijeras) llevamos a cabo esta expansión, en honor a Sheldon Cooper, que incluye Lagarto y Spock.")
-    sleep(0.1)
-    print("Las reglas son sencillas, el objetivo del juego es vencer al oponente con el arma seleccionada. Cada arma gana a dos armas y a su vez pierde contra dos armas.")
-    sleep(0.1)
-    print("Entiéndase por 'arma' cada una de las opciones mostradas en el menú inicial.\n")
-    sleep(0.3)
-    print("Las tijeras cortan el papel, el papel envuelve la piedra, la piedra aplasta al lagarto, el lagarto envenena a Spock, Spock aplasta las tijeras, las tijeras decapitan al lagarto, el lagarto devora el papel, el papel desaprueba a Spock, Spock desintegra la piedra y, como siempre, la piedra aplasta las tijeras.\n")
-    sleep(0.1)
-    print("Para que se vea de forma más clara:\n")
-    sleep(0.2)
-    print("     Piedra > Tijeras y Lagarto")
-    sleep(0.1)
-    print("     Tijeras > Lagarto y Papel")
-    sleep(0.1)
-    print("     Lagarto > Papel y Spock")
-    sleep(0.1)
-    print("     Papel > Spock y Piedra")
-    sleep(0.1)
-    print("     Spock > Piedra y Tijeras")
-    sleep(0.5)
+    print("""
+    Partiendo del juego básico (Piedra, Papel y Tijeras) llevamos a cabo esta expansión, en honor a Sheldon Cooper, que incluye Lagarto y Spock.
+    \nLas reglas son sencillas, el objetivo del juego es vencer al oponente con el arma seleccionada. Cada arma gana a dos armas y a su vez pierde contra dos armas.
+    \nEntiéndase por 'arma' cada una de las opciones mostradas en el menú inicial.\n
+    \nLas tijeras cortan el papel, el papel envuelve la piedra, la piedra aplasta al lagarto, el lagarto envenena a Spock, Spock aplasta las tijeras, las tijeras decapitan al lagarto, el lagarto devora el papel, el papel desaprueba a Spock, Spock desintegra la piedra y, como siempre, la piedra aplasta las tijeras.\n
+    \nPara que se vea de forma más clara:\n
+    \n     Piedra > Tijeras y Lagarto
+    \n     Tijeras > Lagarto y Papel
+    \n     Lagarto > Papel y Spock
+    \n     Papel > Spock y Piedra
+    \n     Spock > Piedra y Tijeras
+    """)
 
 def opcion_ayuda(respuesta: str) -> bool:
     '''
@@ -172,7 +167,7 @@ Finalizado = False
 
 print("Bienvenid@ al juego, a continuación mostraremos el menú de inicio seguido del menú de elecciones.")
 
-menu_inicial()
+paso_a_paso(menu_inicial())
 menu_eleccion()
 
 respuesta = ""
