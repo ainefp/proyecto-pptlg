@@ -1,22 +1,6 @@
 from random import randint
 from time import sleep
 
-# def paso_a_paso(texto: str) -> str:
-#     '''
-#     Imprime letra por letra el texto que recibe, su utilidad es meramente estética.
-
-#     Parámetros
-#     texto
-#         Texto que se desea imprimir lentamente
-    
-#     Devuelve
-#     str
-#         Texto recibido con un tiempo de espera de 0.05 segundos entre cada caracter.
-#     '''
-#     for letra in texto:
-#         print(letra, end="")
-#         sleep(0.05)
-
 def num_aleatorio() -> int:
     '''
     Genera y devuelve un número aleatorio entre 0 y 4 (ambos incluídos)
@@ -41,13 +25,16 @@ def menu_inicial() -> str:
     str
         Menú inicial del juego
     '''
-    print("""
-    - A lo largo del juego puede responder con palabras clave a cualquier pregunta en el momento en que la terminal le permita escribir. Dichas palabras son las siguientes:
-    - Cuando quiera salir del juego puede escribir 'a', 'abandonar' o 'salir'.
-    - Si desea ver a qué número corresponde cada arma a lo largo de las partidas, puede escribir 'menue'.
-    - También puede acceder a este menú escribiendo 'menui', 'ayuda' o 'help'.
-    - Para continuar jugando presione 's' cuando se le indique.
-    """, end="")
+    print("\n- A lo largo del juego puede responder con palabras clave a cualquier pregunta en el momento en que la terminal le permita escribir. Dichas palabras son las siguientes:")
+    sleep(0.1)
+    print("- Cuando quiera salir del juego puede escribir 'a', 'abandonar' o 'salir'.")
+    sleep(0.1)
+    print("- Si desea ver a qué número corresponde cada arma a lo largo de las partidas, puede escribir 'menue'.")
+    sleep(0.1)
+    print("- También puede acceder a este menú escribiendo 'menui', 'ayuda' o 'help'.")
+    sleep(0.1)
+    print("- Para continuar jugando presione 's' cuando se le indique.\n")
+    sleep(0.1)
 
 def menu_eleccion() -> str:
     '''
@@ -60,17 +47,19 @@ def menu_eleccion() -> str:
     str
         Menú de elección de arma
     '''
-    print("""
-    1. Piedra
-    2. Spock
-    3. Papel
-    4. Lagarto
-    5. Tijeras
-    """)
+    print("     1. Piedra")
+    sleep(0.1)
+    print("     2. Spock")
+    sleep(0.1)
+    print("     3. Papel")
+    sleep(0.1)
+    print("     4. Lagarto")
+    sleep(0.1)
+    print("     5. Tijeras\n")
 
 def reglas() -> str:
     '''
-    Pregunta al usuario si quiere conocer las reglas del juego para mostrar, o no, más información.
+    Muestra el menú de reglas, necesarias si el usuario no conoce las reglas del juego.
     
     Parámetros
     No recibe nada
@@ -81,18 +70,26 @@ def reglas() -> str:
         Si 'respuesta' es 'n' no imprime nada
         Si 'respuesta' es cualquier otra cosa, imprime un mensaje de error y pregunta de nuevo
     '''
-    print("""
-    Partiendo del juego básico (Piedra, Papel y Tijeras) llevamos a cabo esta expansión, en honor a Sheldon Cooper, que incluye Lagarto y Spock.
-    Las reglas son sencillas, el objetivo del juego es vencer al oponente con el arma seleccionada. Cada arma gana a dos armas y a su vez pierde contra dos armas.
-    Entiéndase por 'arma' cada una de las opciones mostradas en el menú inicial.
-    Las tijeras cortan el papel, el papel envuelve la piedra, la piedra aplasta al lagarto, el lagarto envenena a Spock, Spock aplasta las tijeras, las tijeras decapitan al lagarto, el lagarto devora el papel, el papel desaprueba a Spock, Spock desintegra la piedra y, como siempre, la piedra aplasta las tijeras.
-    Para que se vea de forma más clara:
-         Piedra > Tijeras y Lagarto
-         Tijeras > Lagarto y Papel
-         Lagarto > Papel y Spock
-         Papel > Spock y Piedra
-         Spock > Piedra y Tijeras
-    """)
+    print("\nPartiendo del juego básico (Piedra, Papel y Tijeras) llevamos a cabo esta expansión, en honor a Sheldon Cooper, que incluye Lagarto y Spock.")
+    sleep(0.1)
+    print("Las reglas son sencillas, el objetivo del juego es vencer al oponente con el arma seleccionada. Cada arma gana a dos armas y a su vez pierde contra dos armas.")
+    sleep(0.1)
+    print("Entiéndase por 'arma' cada una de las opciones mostradas en el menú inicial.")
+    sleep(0.1)
+    print("Las tijeras cortan el papel, el papel envuelve la piedra, la piedra aplasta al lagarto, el lagarto envenena a Spock, Spock aplasta las tijeras, las tijeras decapitan al lagarto, el lagarto devora el papel, el papel desaprueba a Spock, Spock desintegra la piedra y, como siempre, la piedra aplasta las tijeras.")
+    sleep(0.1)
+    print("\nPara que se vea de forma más clara:")
+    sleep(0.1)
+    print("     Piedra > Tijeras y Lagarto")
+    sleep(0.1)
+    print("     Tijeras > Lagarto y Papel")
+    sleep(0.1)
+    print("     Lagarto > Papel y Spock")
+    sleep(0.1)
+    print("     Papel > Spock y Piedra")
+    sleep(0.1)
+    print("     Spock > Piedra y Tijeras\n")
+    sleep(0.5)
 
 def opcion_ayuda(respuesta: str) -> bool:
     '''
@@ -176,18 +173,20 @@ def partida(ordenador: int, usuario: int) -> bool | str:
 
 Finalizado = False
 
-print("Bienvenid@ al juego, a continuación mostraremos el menú de inicio seguido del menú de elecciones.")
+print("Bienvenid@ al juego, a continuación mostraremos el menú de inicio seguido del menú de elecciones.\n")
+sleep(0.5)
 
-# menu_inicial = menu_inicial()
-# paso_a_paso(menu_inicial)
-# menu_inicial
-# menu_eleccion()
+print("\nMENÚ INICIAL:")
+menu_inicial()
+
+print("\nMENÚ DE ELECCIÓN:")
+menu_eleccion()
 
 respuesta = ""
 respuesta_valida = False
 
 while not respuesta_valida:
-    respuesta = input("\n¿Quiere ver las reglas del juego? [s/n] ")
+    respuesta = input("¿Quiere ver las reglas del juego? [s/n] ")
 
     if respuesta != "s" and respuesta != "n" and not opcion_ayuda(respuesta):
         print("El parámetro introducido no es válido, por favor inténtelo de nuevo respondiendo con 's', 'n' o alguna palabra clave.\n")
@@ -234,17 +233,21 @@ while not Finalizado:
                 case "reglas":
                     print()
                     reglas()
-                case "a" | "abandonar" | "salir":
-                    respuesta_valida = True
-                    break
                 case "menui" | "ayuda" | "help":
                     menu_inicial()
                 case "menue":
                     menu_eleccion()
+                case "a" | "abandonar" | "salir":
+                    pregunta_uvalida = True
+            
+        if pregunta_usuario == "salir":
+            break
         
         opcion_ordenador = num_aleatorio()
-
+        
+        sleep(0.2)
         print("Tu elección ha sido", eleccion(opcion_usuario), "y la del ordenador", eleccion(opcion_ordenador), "\n")
+        sleep(0.5)
 
         resultado = partida(opcion_ordenador, opcion_usuario)
 
@@ -269,6 +272,9 @@ while not Finalizado:
 
         sleep(0.8)
 
+    if pregunta_usuario == "salir":
+            break
+    
     if victorias_usuario > victorias_ordenador:
         print("Felicidades!! Has ganado las tres partidas, puedes seguir jugando si lo deseas.\n\n")
     else:
@@ -290,9 +296,6 @@ while not Finalizado:
                 repeticion_valida = True
                 sleep(0.4)
                 print("_____________________________________________________________")
-            case "a" | "abandonar" | "salir":
-                repeticion_valida = True
-                Finalizado = True
             case "reglas":
                 print()
                 reglas()
@@ -300,12 +303,11 @@ while not Finalizado:
                 menu_inicial()
             case "menue":
                 menu_eleccion()
+            case "a" | "abandonar" | "salir":
+                repeticion_valida = True
+                Finalizado = True
     
 sleep(0.5)
 print("\nEspero que se haya divertido, hasta la próxima.")
 
-#   SOLUCIONAR: yo spock y pc spock = empate
-#  Meter función con bucle for para imprimir letra por letra el textp que le pase.
 #  Implementar lo del ordenador tramposo.
-
-# modifiqué eleccion()
