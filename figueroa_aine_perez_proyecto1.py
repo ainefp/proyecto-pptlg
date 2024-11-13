@@ -97,14 +97,14 @@ def opcion_ayuda(respuesta: str) -> bool:
 
     Parámetros
     respuesta
-        Palabra que introduce el usuario
+        Palabra que introduce el usuario.
 
     Devuelve
     bool
         True si la palabra corresponde a alguna acción, False en caso contrario.
     '''
     match respuesta:
-        case "a" | "abandonar" | "salir" | "menui" | "ayuda" | "help" | "menue" | "reglas":
+        case "menui" | "ayuda" | "help" | "menue" | "reglas":
             return True
         case _:
             return False
@@ -116,13 +116,31 @@ def opcion_usuario_partida(respuesta: str) -> bool:
 
     Parámetros
     respuesta
-        Número que introduce el usuario
+        Número que introduce el usuario.
 
     Devuelve
     bool
         True si el número se encuentra entre 0 y 4, False en caso contrario.
     '''
     return respuesta in ["1", "2", "3", "4", "5"]
+
+def opcion_salida(respuesta: str) -> bool:
+    '''
+    Comprueba si la palabra que se le pasa indica que el usuario quiere salir del programa.
+
+    Parámetros
+    respuesta
+        Palabra que introduce el usuario.
+
+    Devuelve
+    bool
+        True si el usuario indica que quiere salir, False en caso contrario.
+    '''
+    match respuesta:
+        case "a" | "abandonar" | "salir":
+            return True
+        case _:
+            return False
 
 def eleccion(numero: int) -> str:
     '''
@@ -188,7 +206,7 @@ respuesta_valida = False
 while not respuesta_valida:
     respuesta = input("¿Quiere ver las reglas del juego? [s/n] ")
 
-    if respuesta != "s" and respuesta != "n" and not opcion_ayuda(respuesta):
+    if respuesta != "s" and respuesta != "n" and not opcion_ayuda(respuesta) and not opcion_salida(respuesta):
         print("El parámetro introducido no es válido, por favor inténtelo de nuevo respondiendo con 's', 'n' o alguna palabra clave.\n")
 
     match respuesta:
@@ -223,11 +241,11 @@ while not Finalizado:
         while not pregunta_uvalida:
             pregunta_usuario = input("Elija una de las opciones: ")
 
-            if not opcion_usuario_partida(pregunta_usuario) and not opcion_ayuda(pregunta_usuario):
+            if not opcion_usuario_partida(pregunta_usuario) and not opcion_ayuda(pregunta_usuario) and not opcion_salida(pregunta_usuario):
                 print("El parámetro introducido no es válido, debe introducir un número entero comprendido entre 1 y 3, por favor inténtelo de nuevo.\n")
 
             match pregunta_usuario:
-                case "1" | "2" | "3" | "4" | "5":
+                case opcion_usuario_partida(pregunta_usuario):
                     opcion_usuario = int(pregunta_usuario) - 1
                     pregunta_uvalida = True
                 case "reglas":
@@ -240,7 +258,7 @@ while not Finalizado:
                 case "a" | "abandonar" | "salir":
                     pregunta_uvalida = True
             
-        if pregunta_usuario == "salir":
+        if opcion_salida(pregunta_usuario):
             break
         
         opcion_ordenador = num_aleatorio()
@@ -272,7 +290,7 @@ while not Finalizado:
 
         sleep(0.8)
 
-    if pregunta_usuario == "salir":
+    if opcion_salida(pregunta_usuario):
             break
     
     if victorias_usuario > victorias_ordenador:
@@ -288,7 +306,7 @@ while not Finalizado:
     while not repeticion_valida:
         repeticion = input("\n¿Quiere volver a jugar o desea salir? s(seguir) / a(abandonar): ")
 
-        if repeticion != "s" and not opcion_ayuda(repeticion):
+        if repeticion != "s" and not opcion_ayuda(repeticion) and not opcion_salida(repeticion):
             print("El parámetro introducido no es válido, por favor inténtelo de nuevo respondiendo con 's' para seguir jugando, 'a' para abandonar o una palabra clave.\n")
 
         match repeticion:
