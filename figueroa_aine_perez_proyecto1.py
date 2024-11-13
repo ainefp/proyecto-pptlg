@@ -167,6 +167,26 @@ def eleccion(numero: int) -> str:
         case 4:
             return "tijeras"
 
+def ordenador_tramposo(victorias_ordenador: int, victorias_usuario: int) -> bool:
+    '''
+    Si el ordenador va perdiendo, esta función lo detecta y devuelve True.
+
+    Parámetros
+    victorias_ordenador
+        Número de victorias del ordenador
+    victorias_usuario
+        Número de victorias del usuario
+    
+    Devuelve
+        True si el ordenador va perdiendo, False en caso contrario
+    '''
+    if victorias_ordenador == 2 and victorias_usuario == 2:
+        return True
+    elif victorias_usuario == 2 and victorias_ordenador < victorias_usuario:
+        return True
+    else:
+        return False
+
 def partida(ordenador: int, usuario: int) -> bool | str:
     '''
     Ejecución de la partida. Recibe en primer lugar el número del arma seleccionada por el ordenador, seguido de la selección del usuario.
@@ -290,6 +310,9 @@ while not Finalizado:
 
         sleep(0.8)
 
+        if ordenador_tramposo(victorias_ordenador, victorias_usuario):
+            victorias_ordenador = 3
+
     if opcion_salida(pregunta_usuario):
             break
     
@@ -327,5 +350,3 @@ while not Finalizado:
     
 sleep(0.5)
 print("\nEspero que se haya divertido, hasta la próxima.")
-
-#  Implementar lo del ordenador tramposo.
