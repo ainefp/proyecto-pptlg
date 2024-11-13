@@ -1,21 +1,21 @@
 from random import randint
 from time import sleep
 
-def paso_a_paso(texto: str) -> str:
-    '''
-    Imprime letra por letra el texto que recibe, su utilidad es meramente estética.
+# def paso_a_paso(texto: str) -> str:
+#     '''
+#     Imprime letra por letra el texto que recibe, su utilidad es meramente estética.
 
-    Parámetros
-    texto
-        Texto que se desea imprimir lentamente
+#     Parámetros
+#     texto
+#         Texto que se desea imprimir lentamente
     
-    Devuelve
-    str
-        Texto recibido con un tiempo de espera de 0.05 segundos entre cada caracter.
-    '''
-    for letra in texto:
-        print(letra, end="")
-        sleep(0.05)
+#     Devuelve
+#     str
+#         Texto recibido con un tiempo de espera de 0.05 segundos entre cada caracter.
+#     '''
+#     for letra in texto:
+#         print(letra, end="")
+#         sleep(0.05)
 
 def num_aleatorio() -> int:
     '''
@@ -125,7 +125,7 @@ def opcion_usuario_partida(respuesta: str) -> bool:
     bool
         True si el número se encuentra entre 0 y 4, False en caso contrario.
     '''
-    return True if respuesta in ["1", "2", "3", "4", "5"]
+    return respuesta in ["1", "2", "3", "4", "5"]
 
 def eleccion(numero: int) -> str:
     '''
@@ -178,8 +178,10 @@ Finalizado = False
 
 print("Bienvenid@ al juego, a continuación mostraremos el menú de inicio seguido del menú de elecciones.")
 
-paso_a_paso(menu_inicial())
-menu_eleccion()
+# menu_inicial = menu_inicial()
+# paso_a_paso(menu_inicial)
+# menu_inicial
+# menu_eleccion()
 
 respuesta = ""
 respuesta_valida = False
@@ -226,7 +228,7 @@ while not Finalizado:
                 print("El parámetro introducido no es válido, debe introducir un número entero comprendido entre 1 y 3, por favor inténtelo de nuevo.\n")
 
             match pregunta_usuario:
-                case opcion_usuario_partida(pregunta_usuario):
+                case "1" | "2" | "3" | "4" | "5":
                     opcion_usuario = int(pregunta_usuario) - 1
                     pregunta_uvalida = True
                 case "reglas":
@@ -242,33 +244,23 @@ while not Finalizado:
         
         opcion_ordenador = num_aleatorio()
 
-        sleep(0.3)
-
         print("Tu elección ha sido", eleccion(opcion_usuario), "y la del ordenador", eleccion(opcion_ordenador), "\n")
-
-        sleep(0.6)
 
         resultado = partida(opcion_ordenador, opcion_usuario)
 
-        if resultado:
+        if resultado == True:
             victorias_ordenador += 1
             print("El ordenador ha ganado esta partida.")
-            sleep(0.1)
             print("\nRecuento de puntos:")
-            sleep(0.1)
             print("Victorias usuario:", victorias_usuario, " |  Victorias ordenador:", victorias_ordenador)
         elif not resultado:
             victorias_usuario += 1
             print("Tú has ganado esta partida.")
-            sleep(0.1)
             print("\nRecuento de puntos:")
-            sleep(0.1)
             print("Victorias usuario:", victorias_usuario, " |  Victorias ordenador:", victorias_ordenador)
-        elif resultado == "empate":
+        else:
             print("El resultado de esta partida ha sido", resultado)
-            sleep(0.1)
             print("\nRecuento de puntos:")
-            sleep(0.1)
             print("Victorias usuario:", victorias_usuario, " |  Victorias ordenador:", victorias_ordenador)
         
         sleep(0.4)
