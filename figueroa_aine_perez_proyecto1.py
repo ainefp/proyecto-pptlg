@@ -2,6 +2,9 @@ from random import randint
 from time import sleep
 
 def paso_a_paso(texto: str) -> str:
+    '''
+    Imprime el texto
+    '''
     for letra in range(texto):
         print(letra)
         sleep(0.1)
@@ -72,15 +75,15 @@ def reglas() -> str:
     '''
     print("""
     Partiendo del juego básico (Piedra, Papel y Tijeras) llevamos a cabo esta expansión, en honor a Sheldon Cooper, que incluye Lagarto y Spock.
-    \nLas reglas son sencillas, el objetivo del juego es vencer al oponente con el arma seleccionada. Cada arma gana a dos armas y a su vez pierde contra dos armas.
-    \nEntiéndase por 'arma' cada una de las opciones mostradas en el menú inicial.\n
-    \nLas tijeras cortan el papel, el papel envuelve la piedra, la piedra aplasta al lagarto, el lagarto envenena a Spock, Spock aplasta las tijeras, las tijeras decapitan al lagarto, el lagarto devora el papel, el papel desaprueba a Spock, Spock desintegra la piedra y, como siempre, la piedra aplasta las tijeras.\n
-    \nPara que se vea de forma más clara:\n
-    \n     Piedra > Tijeras y Lagarto
-    \n     Tijeras > Lagarto y Papel
-    \n     Lagarto > Papel y Spock
-    \n     Papel > Spock y Piedra
-    \n     Spock > Piedra y Tijeras
+    Las reglas son sencillas, el objetivo del juego es vencer al oponente con el arma seleccionada. Cada arma gana a dos armas y a su vez pierde contra dos armas.
+    Entiéndase por 'arma' cada una de las opciones mostradas en el menú inicial.
+    Las tijeras cortan el papel, el papel envuelve la piedra, la piedra aplasta al lagarto, el lagarto envenena a Spock, Spock aplasta las tijeras, las tijeras decapitan al lagarto, el lagarto devora el papel, el papel desaprueba a Spock, Spock desintegra la piedra y, como siempre, la piedra aplasta las tijeras.
+    Para que se vea de forma más clara:
+         Piedra > Tijeras y Lagarto
+         Tijeras > Lagarto y Papel
+         Lagarto > Papel y Spock
+         Papel > Spock y Piedra
+         Spock > Piedra y Tijeras
     """)
 
 def opcion_ayuda(respuesta: str) -> bool:
