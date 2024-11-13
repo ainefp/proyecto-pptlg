@@ -3,11 +3,19 @@ from time import sleep
 
 def paso_a_paso(texto: str) -> str:
     '''
-    Imprime el texto
+    Imprime letra por letra el texto que recibe, su utilidad es meramente estética.
+
+    Parámetros
+    texto
+        Texto que se desea imprimir lentamente
+    
+    Devuelve
+    str
+        Texto recibido con un tiempo de espera de 0.05 segundos entre cada caracter.
     '''
-    for letra in range(texto):
-        print(letra)
-        sleep(0.1)
+    for letra in texto:
+        print(letra, end="")
+        sleep(0.05)
 
 def num_aleatorio() -> int:
     '''
@@ -117,7 +125,7 @@ def opcion_usuario_partida(respuesta: str) -> bool:
     bool
         True si el número se encuentra entre 0 y 4, False en caso contrario.
     '''
-    return respuesta in ["1", "2", "3", "4", "5"]
+    return True if respuesta in ["1", "2", "3", "4", "5"]
 
 def eleccion(numero: int) -> str:
     '''
@@ -307,3 +315,5 @@ print("\nEspero que se haya divertido, hasta la próxima.")
 #   SOLUCIONAR: yo spock y pc spock = empate
 #  Meter función con bucle for para imprimir letra por letra el textp que le pase.
 #  Implementar lo del ordenador tramposo.
+
+# modifiqué eleccion()

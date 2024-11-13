@@ -31,7 +31,6 @@ def menu_inicial() -> str:
     - También puede acceder a este menú respondiendo 'menui', 'ayuda' o 'help' a cualquier pregunta en el momento en que la terminal le permita escribir si lo desea.
     - Para continuar jugando presione 's' cuando se le indique.
     """, end="")
-    sleep(0.1)
 
 def menu_eleccion() -> str:
     '''
@@ -51,7 +50,6 @@ def menu_eleccion() -> str:
     4. Lagarto
     5. Tijeras
     """)
-    sleep(0.1)
 
 def reglas() -> str:
     '''
@@ -67,25 +65,15 @@ def reglas() -> str:
         Si 'respuesta' es cualquier otra cosa, imprime un mensaje de error y pregunta de nuevo
     '''
     print("Partiendo del juego básico (Piedra, Papel y Tijeras) llevamos a cabo esta expansión, en honor a Sheldon Cooper, que incluye Lagarto y Spock.")
-    sleep(0.1)
     print("Las reglas son sencillas, el objetivo del juego es vencer al oponente con el arma seleccionada. Cada arma gana a dos armas y a su vez pierde contra dos armas.")
-    sleep(0.1)
     print("Entiéndase por 'arma' cada una de las opciones mostradas en el menú inicial.\n")
-    sleep(0.3)
     print("Las tijeras cortan el papel, el papel envuelve la piedra, la piedra aplasta al lagarto, el lagarto envenena a Spock, Spock aplasta las tijeras, las tijeras decapitan al lagarto, el lagarto devora el papel, el papel desaprueba a Spock, Spock desintegra la piedra y, como siempre, la piedra aplasta las tijeras.\n")
-    sleep(0.1)
     print("Para que se vea de forma más clara:\n")
-    sleep(0.2)
     print("     Piedra > Tijeras y Lagarto")
-    sleep(0.1)
     print("     Tijeras > Lagarto y Papel")
-    sleep(0.1)
     print("     Lagarto > Papel y Spock")
-    sleep(0.1)
     print("     Papel > Spock y Piedra")
-    sleep(0.1)
     print("     Spock > Piedra y Tijeras")
-    sleep(0.5)
 
 def opcion_ayuda(respuesta: str) -> bool:
     '''
@@ -101,7 +89,7 @@ def opcion_ayuda(respuesta: str) -> bool:
     '''
     match respuesta:
         case "a" | "abandonar" | "salir" | "menui" | "ayuda" | "help" | "menue" | "reglas":
-            return
+            return True
         case _:
             return False
 
@@ -119,7 +107,7 @@ def opcion_usuario_partida(respuesta: str) -> bool:
     '''
     match respuesta:
         case "0" | "1" | "2" | "3" | "4":
-            return
+            return True
         case _:
             return False
 
@@ -202,15 +190,11 @@ while respuesta_valida == False:
             menu_eleccion()
             respuesta = ""
 
-sleep(0.2)
-
 while not Finalizar:
     victorias_usuario = 0
     victorias_ordenador = 0
 
-    sleep(0.1)
     print("_____________________________________________________________\n")
-    sleep(0.1)
 
     while victorias_ordenador < 3 and victorias_usuario < 3:
         pregunta_usuario = input("Elija una de las opciones: ")
@@ -236,7 +220,7 @@ while not Finalizar:
 
         opcion_ordenador = num_aleatorio()
 
-        sleep(0.3)
+
         print("Tu elección ha sido", eleccion(opcion_usuario), "y la del ordenador", eleccion(opcion_ordenador), "\n")
 
         sleep(0.6)
@@ -246,22 +230,22 @@ while not Finalizar:
         if resultado == True:
             victorias_ordenador += 1
             print("El ordenador ha ganado esta partida.")
-            sleep(0.1)
+    
             print("\nRecuento de puntos:")
-            sleep(0.1)
+    
             print("Victorias usuario:", victorias_usuario, " |  Victorias ordenador:", victorias_ordenador)
         elif resultado == False:
             victorias_usuario += 1
             print("Tú has ganado esta partida.")
-            sleep(0.1)
+    
             print("\nRecuento de puntos:")
-            sleep(0.1)
+    
             print("Victorias usuario:", victorias_usuario, " |  Victorias ordenador:", victorias_ordenador)
         elif resultado == "empate":
             print("El resultado de esta partida ha sido", resultado)
-            sleep(0.1)
+    
             print("\nRecuento de puntos:")
-            sleep(0.1)
+    
             print("Victorias usuario:", victorias_usuario, " |  Victorias ordenador:", victorias_ordenador)
         
         sleep(0.4)
@@ -276,7 +260,6 @@ while not Finalizar:
         print("Vaya, el ordenador ha ganado las tres partidas, te deseo más suerte la próxima vez.\n\n")
     
 
-    sleep(0.5)
 
     repeticion = ""
     repeticion_valida = False
@@ -303,8 +286,7 @@ while not Finalizar:
             case "menue":
                 menu_eleccion()
                 repeticion = ""
-    
-sleep(0.5)
+
 print("\nEspero que se haya divertido, hasta la próxima.")
 
 # Queda por implementar la llamada a funciones durante la partida.
