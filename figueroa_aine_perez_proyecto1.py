@@ -265,7 +265,7 @@ while not Finalizado:
                 print("El parámetro introducido no es válido, debe introducir un número entero comprendido entre 1 y 3, por favor inténtelo de nuevo.\n")
 
             match pregunta_usuario:
-                case opcion_usuario_partida(pregunta_usuario):
+                case "1" | "2" | "3" | "4" | "5":
                     opcion_usuario = int(pregunta_usuario) - 1
                     pregunta_uvalida = True
                 case "reglas":
